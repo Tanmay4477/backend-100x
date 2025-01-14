@@ -2,5 +2,7 @@
     "jwtSecret": "jwtSecretToken",
     "jwtExpiration": 3600000,
     "port": 3000,
-    "saltRounds": 10
+    "saltRounds": 10,
+    "node_env": "development"
 }
+

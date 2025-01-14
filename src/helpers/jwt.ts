@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import config from "config";
 
-export const generateJwtToken = (userId: string): string => {
+export const generateJwtToken = (userId: number): string => {
     try {
         const token: string = jwt.sign({userId}, config.get<string>("jwtSecret"), { expiresIn: config.get<string>("jwtExpiration")});
         return token;
