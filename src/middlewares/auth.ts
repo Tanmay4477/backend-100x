@@ -1,12 +1,13 @@
-import { NextFunction, Response } from "express";
+import { NextFunction, RequestHandler, Response } from "express";
 import config from "config";
 import jwt from "jsonwebtoken";
 import { CustomRequest } from "../types/Types";
 
-const commonAuth = (req: CustomRequest, res: Response, next: NextFunction):void | Response<{msg: string}> => {
-        const token = req.cookies.token;
+const commonAuth: RequestHandler = (req: any, res: Response, next: NextFunction): void => {
+        const token = req.cookies["access-token"];
         if(!token) {
-            return res.status(401).json({msg: "No Token Provided"});
+            res.status(401).json({msg: "No Token Provided", valid: false});
+            return
         };
         try {
             if(!config.get("jwtSecret")) {
@@ -16,6 +17,9 @@ const commonAuth = (req: CustomRequest, res: Response, next: NextFunction):void 
             req.userId = id;
             next();
     } catch (error){
-        return res.status(400).json({msg: "Not a verified User"})
+        res.status(400).json({msg: "Not a verified User", valid: false})
+        return
     }
 }
+
+export default commonAuth;

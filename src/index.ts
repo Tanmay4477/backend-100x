@@ -11,6 +11,8 @@ app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true
 }));
+
+console.log("code is on line 15")
   
 app.use(express.json());
 app.use(cookieParser());

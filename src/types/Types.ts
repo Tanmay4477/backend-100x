@@ -1,5 +1,4 @@
 export interface CustomRequest extends Request {
     userId?: string;
-    cookies: {[key: string]: string};
+    cookies?: Record<"access-token", string> | undefined;
 }
-
